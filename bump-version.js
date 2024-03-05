@@ -4,7 +4,7 @@ const { exec } = require('child_process');
 const APP_VERSION_FILENAME = 'app-version.json';
 const PRODUCTION_KEY = 'production';
 const STAGING_KEY = 'staging';
-const MAJOR_RELEASE = 'major-release';
+const MANOR_RELEASE = 'minor-release';
 const VERSION_KEY = 'version';
 const BUILD_KEY = 'build';
 const ANDROID_VERSION_PROPERTIES_FILE = './android/app/app-version.properties';
@@ -18,7 +18,7 @@ const IOS_STAGING_NOTIFICATION_PLIST_PATH = './ios-staging-project-NotificationS
 
 const args = process.argv.slice(2);
 const appArg = args[0];
-const majorArg = args[1];
+const minorArg = args[1];
 
 const readFile = (filePath) => {
   try {
@@ -135,7 +135,7 @@ const bumpVersion = () => {
   if (versionApp) {
     // get current version and update new version
     const appVersion = versionApp[VERSION_KEY];
-    const newVersion = updateVersion(appVersion, majorArg === MAJOR_RELEASE);
+    const newVersion = updateVersion(appVersion, minorArg === MANOR_RELEASE);
     // get current build and update new build
     const build = versionApp[BUILD_KEY];
     const newBuild = updateBuild(build);
@@ -149,7 +149,7 @@ const bumpVersion = () => {
     });
     console.log(' <><><><> DONE <><><><> ');
   } else {
-    console.log('[BUMP_VERSION] error enviroment ', appArg);
+    console.log('[BUMP_VERSION] incorrect enviroment ', appArg);
   }
 };
 
